@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "name": "John Smith",
+    "contact": "+1-555-0101",
+    "email": "john.smith@farm.com",
+    "farmSize": 125.5,
+    "location": "North Valley"
+  },
+  {
+    "id": 2,
+    "name": "Sarah Johnson",
+    "contact": "+1-555-0102",
+    "email": "sarah.j@farm.com",
+    "farmSize": 200.0,
+    "location": "East Plains"
+  },
+  {
+    "id": 3,
+    "name": "Michael Brown",
+    "contact": "+1-555-0103",
+    "email": "m.brown@farm.com",
+    "farmSize": 150.0,
+    "location": "South Ridge"
+  },
+  {
+    "id": 4,
+    "name": "David Lee",
+    "contact": "+1-555-0104",
+    "email": "david.lee@farm.com",
+    "farmSize": 180.0,
+    "location": "West Fields"
+  },
+  {
+    "id": 5,
+    "name": "Emily Davis",
+    "contact": "+1-555-0105",
+    "email": "emily.d@farm.com",
+    "farmSize": 95.0,
+    "location": "Central Valley"
+  },
+  {
+    "id": 6,
+    "name": "Robert Wilson",
+    "contact": "+1-555-0106",
+    "email": "r.wilson@farm.com",
+    "farmSize": 45.0,
+    "location": "North Plains"
+  },
+  {
+    "id": 7,
+    "name": "Jennifer Martinez",
+    "contact": "+1-555-0107",
+    "email": "jen.martinez@farm.com",
+    "farmSize": 110.0,
+    "location": "East Valley"
+  },
+  {
+    "id": 8,
+    "name": "James Anderson",
+    "contact": "+1-555-0108",
+    "email": "j.anderson@farm.com",
+    "farmSize": 85.0,
+    "location": "South Fields"
+  }
+]

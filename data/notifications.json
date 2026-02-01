@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "Harvest Alert",
+    "message": "Winter Wheat harvest scheduled for next week",
+    "type": "warning",
+    "time": "2 hours ago",
+    "read": false
+  },
+  {
+    "id": 2,
+    "title": "New Farmer Registered",
+    "message": "James Anderson joined the system",
+    "type": "info",
+    "time": "5 hours ago",
+    "read": false
+  },
+  {
+    "id": 3,
+    "title": "Yield Report Ready",
+    "message": "Q4 2023 yield report is now available",
+    "type": "success",
+    "time": "1 day ago",
+    "read": true
+  },
+  {
+    "id": 4,
+    "title": "Weather Warning",
+    "message": "Heavy rain expected in North Valley region",
+    "type": "danger",
+    "time": "2 days ago",
+    "read": true
+  },
+  {
+    "id": 5,
+    "title": "System Update",
+    "message": "Dashboard updated with new features",
+    "type": "info",
+    "time": "3 days ago",
+    "read": true
+  }
+]
