@@ -1,0 +1,200 @@
+
+/* Tablets and below (768px) */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        z-index: 1050;
+    }
+    
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .main-content.collapsed {
+        margin-left: 0;
+    }
+    
+    .page-title {
+        font-size: 18px;
+    }
+    
+    .stat-card {
+        padding: 16px;
+    }
+    
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+    
+    .stat-value {
+        font-size: 24px;
+    }
+    
+    .stat-label {
+        font-size: 12px;
+    }
+    
+    .chart-body {
+        padding: 12px;
+    }
+    
+    .content-area {
+        padding: 12px;
+    }
+    
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .page-header h4 {
+        font-size: 20px;
+    }
+    
+    .table-responsive {
+        font-size: 12px;
+    }
+    
+    .table thead th,
+    .table tbody td {
+        padding: 8px;
+    }
+    
+    .modal-dialog {
+        margin: 10px;
+    }
+    
+    .notification-dropdown {
+        min-width: 280px;
+    }
+}
+
+/* Mobile devices (576px) */
+@media (max-width: 576px) {
+    .top-navbar {
+        padding: 0 12px;
+    }
+    
+    .navbar-left,
+    .navbar-right {
+        gap: 8px;
+    }
+    
+    .page-title {
+        font-size: 16px;
+    }
+    
+    .stat-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 22px;
+    }
+    
+    .stat-value {
+        font-size: 20px;
+    }
+    
+    .card-body {
+        padding: 12px;
+    }
+    
+    .btn {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    .form-control,
+    .form-select {
+        font-size: 14px;
+    }
+    
+    .modal-dialog {
+        margin: 5px;
+    }
+    
+    .modal-body {
+        padding: 12px;
+    }
+}
+
+/* Sidebar Overlay for Mobile */
+@media (max-width: 768px) {
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1040;
+        display: none;
+    }
+    
+    .sidebar-overlay.show {
+        display: block;
+    }
+}
+
+/* Large screens optimization */
+@media (min-width: 1400px) {
+    .content-area {
+        padding: 30px;
+    }
+    
+    .stat-value {
+        font-size: 36px;
+    }
+    
+    .chart-body {
+        padding: 24px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .sidebar,
+    .top-navbar,
+    .btn,
+    .page-header button {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+    }
+    
+    .card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .nav-item {
+        min-height: 48px;
+    }
+    
+    .form-control,
+    .form-select {
+        min-height: 44px;
+    }
+}

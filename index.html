@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Management Dashboard</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="./css/charts.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <i class="bi bi-flower1"></i>
+                <span class="brand-text">AgriManage</span>
+            </div>
+        </div>
+        
+        <div class="sidebar-user">
+            <img src="" alt="User Avatar" class="user-avatar">
+            <div class="user-info">
+                <div class="user-name">Admin User</div>
+                <div class="user-role">Farm Manager</div>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-page="dashboard">
+                <i class="bi bi-speedometer2"></i>
+                <span class="nav-text">Dashboard</span>
+            </a>
+            <a href="#" class="nav-item" data-page="crops">
+                <i class="bi bi-flower2"></i>
+                <span class="nav-text">Crops</span>
+            </a>
+            <a href="#" class="nav-item" data-page="farmers">
+                <i class="bi bi-people"></i>
+                <span class="nav-text">Farmers</span>
+            </a>
+            <a href="#" class="nav-item" data-page="reports">
+                <i class="bi bi-file-earmark-text"></i>
+                <span class="nav-text">Reports</span>
+            </a>
+            <a href="#" class="nav-item" data-page="settings">
+                <i class="bi bi-gear"></i>
+                <span class="nav-text">Settings</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Top Navbar -->
+        <nav class="top-navbar">
+            <div class="navbar-left">
+                <button class="btn btn-link sidebar-toggle" id="sidebarToggle">
+                    <i class="bi bi-list"></i>
+                </button>
+                <h4 class="page-title" id="pageTitle">Dashboard</h4>
+            </div>
+            
+            <div class="navbar-right">
+                <!-- Notifications Dropdown -->
+                <div class="dropdown">
+                    <button class="btn btn-link position-relative" type="button" id="notificationDropdown" data-bs-toggle="dropdown">
+                        <i class="bi bi-bell"></i>
+                        <span class="notification-badge" id="notificationBadge">0</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end notification-dropdown" id="notificationList">
+                        <li class="dropdown-header">Notifications</li>
+                        <li><hr class="dropdown-divider"></li>
+                        <!-- Notifications will be populated by JavaScript -->
+                    </ul>
+                </div>
+                
+                <!-- User Dropdown -->
+                <div class="dropdown">
+                    <button class="btn btn-link" type="button" id="userDropdown" data-bs-toggle="dropdown">
+                        <img src="" alt="User" class="user-avatar-small">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Dashboard Content -->
+        <div class="content-area" id="dashboardPage">
+            <!-- Statistics Cards -->
+            <div class="row g-4 mb-4">
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-success">
+                            <i class="bi bi-flower2"></i>
+                        </div>
+                        <div class="stat-details">
+                            <div class="stat-value" id="statCrops">0</div>
+                            <div class="stat-label">Total Crops</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-primary">
+                            <i class="bi bi-house"></i>
+                        </div>
+                        <div class="stat-details">
+                            <div class="stat-value" id="statFarms">0</div>
+                            <div class="stat-label">Total Farms</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-warning">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div class="stat-details">
+                            <div class="stat-value" id="statFarmers">0</div>
+                            <div class="stat-label">Total Farmers</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-info">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <div class="stat-details">
+                            <div class="stat-value" id="statYield">0</div>
+                            <div class="stat-label">Total Yield (tons)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="row g-4 mb-4">
+                <div class="col-lg-8">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h5>Crop Yield Comparison</h5>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h5>Crop Type Distribution</h5>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h5>Monthly Production Trends</h5>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="lineChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crops Management Page -->
+        <div class="content-area d-none" id="cropsPage">
+            <div class="page-header">
+                <h4>Crops Management</h4>
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cropModal" id="addCropBtn">
+                    <i class="bi bi-plus-circle"></i> Add New Crop
+                </button>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="searchCrop" placeholder="Search crops by name, type, or farmer...">
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="filterStatus">
+                                <option value="">All Status</option>
+                                <option value="Planted">Planted</option>
+                                <option value="Growing">Growing</option>
+                                <option value="Harvested">Harvested</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="filterType">
+                                <option value="">All Types</option>
+                                <option value="Cereal">Cereal</option>
+                                <option value="Legume">Legume</option>
+                                <option value="Vegetable">Vegetable</option>
+                                <option value="Fiber">Fiber</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crops Table -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Crop Name</th>
+                                    <th>Type</th>
+                                    <th>Area (acres)</th>
+                                    <th>Status</th>
+                                    <th>Yield (tons)</th>
+                                    <th>Plant Date</th>
+                                    <th>Farmer</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cropsTableBody">
+                                <!-- Table rows will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Farmers Management Page -->
+        <div class="content-area d-none" id="farmersPage">
+            <div class="page-header">
+                <h4>Farmers Management</h4>
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#farmerModal" id="addFarmerBtn">
+                    <i class="bi bi-plus-circle"></i> Add New Farmer
+                </button>
+            </div>
+
+            <!-- Search -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" id="searchFarmer" placeholder="Search farmers by name, location, or contact...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Farmers Grid -->
+            <div class="row g-4" id="farmersGrid">
+                <!-- Farmer cards will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Reports Page -->
+        <div class="content-area d-none" id="reportsPage">
+            <div class="page-header">
+                <h4>Reports & Analytics</h4>
+                <button class="btn btn-success" id="generateReportBtn">
+                    <i class="bi bi-file-earmark-pdf"></i> Generate Report
+                </button>
+            </div>
+
+            <!-- Report Filters -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Report Type</label>
+                            <select class="form-select" id="reportType">
+                                <option value="yield">Yield Summary</option>
+                                <option value="crops">Crops Overview</option>
+                                <option value="farmers">Farmers Performance</option>
+                                <option value="financial">Financial Report</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Start Date</label>
+                            <input type="date" class="form-control" id="reportStartDate">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">End Date</label>
+                            <input type="date" class="form-control" id="reportEndDate">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Summary -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="bi bi-file-earmark-text text-success" style="font-size: 48px;"></i>
+                            <h3 class="mt-3 mb-0">24</h3>
+                            <p class="text-muted mb-0">Total Reports</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="bi bi-calendar-check text-primary" style="font-size: 48px;"></i>
+                            <h3 class="mt-3 mb-0">12</h3>
+                            <p class="text-muted mb-0">This Month</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="bi bi-graph-up-arrow text-warning" style="font-size: 48px;"></i>
+                            <h3 class="mt-3 mb-0">+15%</h3>
+                            <p class="text-muted mb-0">Growth Rate</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="bi bi-clock-history text-info" style="font-size: 48px;"></i>
+                            <h3 class="mt-3 mb-0">5</h3>
+                            <p class="text-muted mb-0">Pending</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Reports Table -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Recent Reports</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Report Name</th>
+                                    <th>Type</th>
+                                    <th>Date Generated</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reportsTableBody">
+                                <!-- Reports will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Page -->
+        <div class="content-area d-none" id="settingsPage">
+            <div class="page-header">
+                <h4>System Settings</h4>
+            </div>
+
+            <div class="row g-4">
+                <!-- Profile Settings -->
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0"><i class="bi bi-person-circle"></i> Profile Settings</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="profileForm">
+                                <div class="mb-3">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="settingName" value="Admin User">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="settingEmail" value="admin@agrimanage.com">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Role</label>
+                                    <input type="text" class="form-control" id="settingRole" value="Farm Manager" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Phone</label>
+                                    <input type="tel" class="form-control" id="settingPhone" value="+1-555-0100">
+                                </div>
+                                <button type="button" class="btn btn-success" id="saveProfileBtn">
+                                    <i class="bi bi-check-circle"></i> Save Changes
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Preferences -->
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0"><i class="bi bi-gear"></i> System Preferences</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Language</label>
+                                <select class="form-select" id="settingLanguage">
+                                    <option value="en" selected>English</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Timezone</label>
+                                <select class="form-select" id="settingTimezone">
+                                    <option value="utc">UTC</option>
+                                    <option value="est" selected>Eastern Time (ET)</option>
+                                    <option value="pst">Pacific Time (PT)</option>
+                                    <option value="cst">Central Time (CT)</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Date Format</label>
+                                <select class="form-select" id="settingDateFormat">
+                                    <option value="mm/dd/yyyy" selected>MM/DD/YYYY</option>
+                                    <option value="dd/mm/yyyy">DD/MM/YYYY</option>
+                                    <option value="yyyy-mm-dd">YYYY-MM-DD</option>
+                                </select>
+                            </div>
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="settingNotifications" checked>
+                                <label class="form-check-label" for="settingNotifications">
+                                    Enable Notifications
+                                </label>
+                            </div>
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="settingEmailAlerts" checked>
+                                <label class="form-check-label" for="settingEmailAlerts">
+                                    Email Alerts
+                                </label>
+                            </div>
+                            <button type="button" class="btn btn-success" id="savePreferencesBtn">
+                                <i class="bi bi-check-circle"></i> Save Preferences
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0"><i class="bi bi-shield-lock"></i> Security</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="passwordForm">
+                                <div class="mb-3">
+                                    <label class="form-label">Current Password</label>
+                                    <input type="password" class="form-control" id="currentPassword">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">New Password</label>
+                                    <input type="password" class="form-control" id="newPassword">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Confirm New Password</label>
+                                    <input type="password" class="form-control" id="confirmPassword">
+                                </div>
+                                <button type="button" class="btn btn-success" id="changePasswordBtn">
+                                    <i class="bi bi-key"></i> Change Password
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Management -->
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0"><i class="bi bi-database"></i> Data Management</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted">Manage your application data and storage</p>
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-outline-primary" id="exportDataBtn">
+                                    <i class="bi bi-download"></i> Export All Data
+                                </button>
+                                <button type="button" class="btn btn-outline-warning" id="clearCacheBtn">
+                                    <i class="bi bi-trash"></i> Clear Cache
+                                </button>
+                                <button type="button" class="btn btn-outline-danger" id="resetDataBtn">
+                                    <i class="bi bi-arrow-counterclockwise"></i> Reset to Default Data
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Crop Modal -->
+    <div class="modal fade" id="cropModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cropModalTitle">Add New Crop</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="cropForm">
+                        <input type="hidden" id="cropId">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="cropName" class="form-label">Crop Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="cropName" required>
+                                <div class="invalid-feedback">Please enter crop name.</div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="cropType" class="form-label">Crop Type <span class="text-danger">*</span></label>
+                                <select class="form-select" id="cropType" required>
+                                    <option value="">Select Type</option>
+                                    <option value="Cereal">Cereal</option>
+                                    <option value="Legume">Legume</option>
+                                    <option value="Vegetable">Vegetable</option>
+                                    <option value="Fiber">Fiber</option>
+                                    <option value="Fruit">Fruit</option>
+                                </select>
+                                <div class="invalid-feedback">Please select crop type.</div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="cropArea" class="form-label">Area (acres) <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="cropArea" step="0.1" min="0" required>
+                                <div class="invalid-feedback">Please enter valid area.</div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="cropStatus" class="form-label">Status <span class="text-danger">*</span></label>
+                                <select class="form-select" id="cropStatus" required>
+                                    <option value="">Select Status</option>
+                                    <option value="Planted">Planted</option>
+                                    <option value="Growing">Growing</option>
+                                    <option value="Harvested">Harvested</option>
+                                </select>
+                                <div class="invalid-feedback">Please select status.</div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="cropYield" class="form-label">Yield (tons)</label>
+                                <input type="number" class="form-control" id="cropYield" step="0.1" min="0" value="0">
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="cropFarmer" class="form-label">Farmer Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="cropFarmer" required>
+                                <div class="invalid-feedback">Please enter farmer name.</div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="cropPlantDate" class="form-label">Plant Date <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="cropPlantDate" required>
+                                <div class="invalid-feedback">Please select plant date.</div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="cropHarvestDate" class="form-label">Expected Harvest Date</label>
+                                <input type="date" class="form-control" id="cropHarvestDate">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" id="saveCropBtn">Save Crop</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Farmer Modal -->
+    <div class="modal fade" id="farmerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="farmerModalTitle">Add New Farmer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="farmerForm">
+                        <input type="hidden" id="farmerId">
+                        <div class="mb-3">
+                            <label for="farmerName" class="form-label">Farmer Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="farmerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="farmerContact" class="form-label">Contact <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" id="farmerContact" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="farmerEmail" class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="farmerEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="farmerFarmSize" class="form-label">Farm Size (acres) <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="farmerFarmSize" step="0.1" min="0" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="farmerLocation" class="form-label">Location <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="farmerLocation" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" id="saveFarmerBtn">Save Farmer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this item? This action cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript Modules -->
+    <script type="module" src="./js/utils.js"></script>
+    <script type="module" src="./js/validation.js"></script>
+    <script type="module" src="./js/sidebar.js"></script>
+    <script type="module" src="./js/dashboard.js"></script>
+    <script type="module" src="./js/charts.js"></script>
+    <script type="module" src="./js/crops.js"></script>
+    <script type="module" src="./js/farmers.js"></script>
+    <script type="module" src="./js/reports.js"></script>
+    <script type="module" src="./js/settings.js"></script>
+    <script type="module" src="./js/main.js"></script>
+</body>
+
+</html>
