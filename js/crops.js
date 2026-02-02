@@ -138,10 +138,10 @@ class CropsManager {
                 <td>${crop.farmer}</td>
                 <td>
                     <button class="btn btn-sm btn-primary btn-action" onclick="cropsManager.editCrop(${crop.id})">
-                        <i class="bi bi-pencil"></i> Edit
+                        <i class="fas fa-edit"></i> Edit
                     </button>
                     <button class="btn btn-sm btn-danger btn-action" onclick="cropsManager.deleteCrop(${crop.id})">
-                        <i class="bi bi-trash"></i> Delete
+                        <i class="fas fa-trash"></i> Delete
                     </button>
                 </td>
             </tr>
